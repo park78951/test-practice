@@ -10,6 +10,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Global
       styles={css`
+        * {
+          box-sizing: border-box;
+        }
         body {
           margin: 0;
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
