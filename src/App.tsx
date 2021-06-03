@@ -1,7 +1,25 @@
 import React from "react";
+import { css } from "@emotion/react";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div css={MayLayout}>
+      <h1 css={Title}>TODO 리스트</h1>
+    </div>
+  );
 }
+
+const MayLayout = css`
+  width: 400px;
+  height: 800px;
+  background-color: Grey;
+  margin: 30px auto;
+  padding: 1px;
+`;
+
+const Title = css`
+  font-size: 48px;
+  text-align: center;
+`;
 
 export default App;
