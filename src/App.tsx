@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { css } from "@emotion/react";
 import Input from "./components/Input";
 
 function App() {
+  const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  }, []);
+
   return (
     <div css={MayLayout}>
       <h1 css={Title}>TODO 리스트</h1>
-      <Input />
+      <Input onSubmit={onSubmit} />
     </div>
   );
 }

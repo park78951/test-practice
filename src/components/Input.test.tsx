@@ -2,14 +2,16 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Input from "./Input";
 
+const submit = jest.fn();
+
 describe("Input Form", () => {
   it("input을 렌더링한다.", () => {
-    const { getByPlaceholderText } = render(<Input />);
+    const { getByPlaceholderText } = render(<Input onSubmit={submit} />);
     expect(getByPlaceholderText("할일을 추가해주세요")).toBeInTheDocument();
   });
 
   it("input에서 정상적으로 값을 변경한다.", () => {
-    const { getByPlaceholderText } = render(<Input />);
+    const { getByPlaceholderText } = render(<Input onSubmit={submit} />);
     const input = getByPlaceholderText(
       "할일을 추가해주세요"
     ) as HTMLInputElement;
@@ -18,9 +20,10 @@ describe("Input Form", () => {
   });
 
   it("버튼을 클릭하여 onSubmit 함수를 실행한다.", () => {
-    const mockFn = jest.fn();
-    const { getByText } = render(<Input onSubmit={mockFn} />);
+    const onSubmit = submit.mockImplementation(e => e.preventDefault());
+    const { getByText } = render(<Input onSubmit={onSubmit} />);
     const button = getByText("추가") as HTMLButtonElement;
     fireEvent.click(button);
+    expect(onSubmit).toHaveBeenCalled();
   });
 });
