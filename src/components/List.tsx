@@ -9,7 +9,11 @@ const List: FC<IListProps> = ({ todos }) => {
   return (
     <div>
       <h2>할일목록</h2>
-      <ul css={ListContainer}>{todos.map(todo => todo)}</ul>
+      <ul css={ListContainer}>
+        {todos.map(todo => (
+          <li>{todo}</li>
+        ))}
+      </ul>
     </div>
   );
 };
@@ -20,6 +24,16 @@ const ListContainer = css`
   border-radius: 4px;
   background-color: lightblue;
   overflow-y: auto;
+  padding: 20px;
+
+  & > li {
+    display: block;
+    margin-bottom: 6px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 `;
 
 export default List;
