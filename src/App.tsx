@@ -1,16 +1,20 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { css } from "@emotion/react";
 import Input from "./components/Input";
+import List from "./components/List";
 
 function App() {
-  const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const [todos, setTodos] = useState<string[]>([]);
+
+  const onSubmit = useCallback((value: string) => {
+    setTodos(prevVals => [...prevVals, value]);
   }, []);
 
   return (
     <div css={MayLayout}>
       <h1 css={Title}>TODO 리스트</h1>
       <Input onSubmit={onSubmit} />
+      <List todos={todos} />
     </div>
   );
 }

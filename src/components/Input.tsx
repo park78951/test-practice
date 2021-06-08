@@ -2,7 +2,7 @@ import React, { FC, useState, useCallback } from "react";
 import { css } from "@emotion/react";
 
 interface IInputProps {
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (value: string) => void;
 }
 
 const Input: FC<IInputProps> = ({ onSubmit }) => {
@@ -16,8 +16,16 @@ const Input: FC<IInputProps> = ({ onSubmit }) => {
     []
   );
 
+  const submitHandler = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      onSubmit(value);
+    },
+    [value, onSubmit]
+  );
+
   return (
-    <form css={FormStyle} onSubmit={onSubmit}>
+    <form css={FormStyle} onSubmit={submitHandler}>
       <input
         value={value}
         onChange={onChangeValue}
