@@ -20,10 +20,9 @@ describe("Input Form", () => {
   });
 
   it("버튼을 클릭하여 onSubmit 함수를 실행한다.", () => {
-    const onSubmit = submit.mockImplementation(e => e.preventDefault());
-    const { getByText } = render(<Input onSubmit={onSubmit} />);
+    const { getByText } = render(<Input onSubmit={submit} />);
     const button = getByText("추가") as HTMLButtonElement;
     fireEvent.click(button);
-    expect(onSubmit).toHaveBeenCalled();
+    expect(submit).toHaveBeenCalled();
   });
 });

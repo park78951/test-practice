@@ -1,7 +1,6 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import List from "./List";
-import Input from "./Input";
 
 describe("TODO List", () => {
   it("할일목록 리스트 UI가 회면에 렌더링된다.", () => {
@@ -9,5 +8,13 @@ describe("TODO List", () => {
     expect(getByText("할일목록")).toBeInTheDocument();
   });
 
-  it("할일을 입력하면 리스트에 아이템이 생성된다.", () => {});
+  it("todo item이 변경되면 리스트에 아이템이 생성된다.", () => {
+    const todos = ["컴퓨터하기"];
+
+    const { getByRole } = render(<List todos={todos} />);
+    const list = getByRole("list");
+    const listItem = getByRole("listitem");
+    expect(list.childElementCount).toBe(1);
+    expect(listItem.textContent).toBe("컴퓨터하기");
+  });
 });

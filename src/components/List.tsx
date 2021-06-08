@@ -9,9 +9,11 @@ const List: FC<IListProps> = ({ todos }) => {
   return (
     <div>
       <h2>할일목록</h2>
-      <ul css={ListContainer}>
-        {todos.map(todo => (
-          <li>{todo}</li>
+      <ul role="list" css={ListContainer}>
+        {todos.map((todo, index) => (
+          <li role="listitem" key={`todo_${index}`}>
+            {todo}
+          </li>
         ))}
       </ul>
     </div>
