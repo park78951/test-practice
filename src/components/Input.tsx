@@ -20,6 +20,7 @@ const Input: FC<IInputProps> = ({ onSubmit }) => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       onSubmit(value);
+      setValue("");
     },
     [value, onSubmit]
   );

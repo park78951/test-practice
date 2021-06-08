@@ -20,9 +20,26 @@ describe("Input Form", () => {
   });
 
   it("버튼을 클릭하여 onSubmit 함수를 실행한다.", () => {
-    const { getByText } = render(<Input onSubmit={submit} />);
+    const { getByText, getByPlaceholderText } = render(
+      <Input onSubmit={submit} />
+    );
     const button = getByText("추가") as HTMLButtonElement;
+
     fireEvent.click(button);
     expect(submit).toHaveBeenCalled();
+  });
+
+  it("버튼 클릭시 input의 값을 삭제한다.", () => {
+    const { getByText, getByPlaceholderText } = render(
+      <Input onSubmit={submit} />
+    );
+    const button = getByText("추가") as HTMLButtonElement;
+    const input = getByPlaceholderText(
+      "할일을 추가해주세요"
+    ) as HTMLInputElement;
+
+    fireEvent.change(input, { target: { value: "컴퓨터하기" } });
+    fireEvent.click(button);
+    expect(input.value).toBe("");
   });
 });
