@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import Input from "./Input";
 
 const submit = jest.fn();
@@ -20,9 +20,7 @@ describe("Input Form", () => {
   });
 
   it("버튼을 클릭하여 onSubmit 함수를 실행한다.", () => {
-    const { getByText, getByPlaceholderText } = render(
-      <Input onSubmit={submit} />
-    );
+    const { getByText } = render(<Input onSubmit={submit} />);
     const button = getByText("추가") as HTMLButtonElement;
 
     fireEvent.click(button);
